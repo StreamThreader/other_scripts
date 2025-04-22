@@ -11,9 +11,9 @@ set "USER_DIR=C:\Users\%USER_NAME%"
 
 
 IF "%USER_NAME%"=="" (
-	echo "USER_NAME is NOT defined, exit"
-	pause
-	exit
+    echo "USER_NAME is NOT defined, exit"
+    pause
+    exit
 )
 
 rem "get user SID"
@@ -24,20 +24,20 @@ net user %USER_NAME% /delete
 
 rem "delete user profile directory"
 if exist %USER_DIR%\ (
-  rd /s /q %USER_DIR%
-  echo "folder %USER_DIR% removed"
+    rd /s /q %USER_DIR%
+    echo "folder %USER_DIR% removed"
 ) else (
-  echo "folder %USER_DIR% not exist, skip"
-  pause
+    echo "folder %USER_DIR% not exist, skip"
+    pause
 )
 
 if "%SidValue%"=="" (
-	echo "SidValue is NOT defined, skip"
-	pause
+    echo "SidValue is NOT defined, skip"
+    pause
 ) else (
-	rem "delete user from profile list"
-	reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\%SidValue%" /f
-	echo "sid value %SidValue% removed from registry"
+    rem "delete user from profile list"
+    reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\%SidValue%" /f
+    echo "sid value %SidValue% removed from registry"
 )
 
 pause
